@@ -27,7 +27,8 @@ exports.getDrives = () => {
     return new Promise((resolve, reject) => {
         spawn.on("close", code => {
             const stdout    = stdouts.join("");
-            const drives    = JSON.parse(stdout);
+            const _drives 	= JSON.parse(stdout);
+			const drives 	= _drives.map(({ name, free, displayRoot }) => { return { name: name + ":", free, displayRoot }; });
 
             resolve(drives);
 
